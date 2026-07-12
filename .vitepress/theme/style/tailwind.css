@@ -989,6 +989,64 @@
     overflow: visible !important;
 }
 
+/* 768px - 959px：搜索变按钮靠右，菜单靠左 */
+@media (min-width: 768px) and (max-width: 959px) {
+    .VPNavBar .content-body {
+        display: flex !important;
+        justify-content: flex-start !important;
+    }
+    .VPNavBar .menu {
+        order: 1 !important;
+        margin-right: auto !important;
+    }
+    .VPNavBar .search {
+        order: 2 !important;
+        margin-left: auto !important;
+    }
+    .VPNavBar .search .text {
+        display: none !important;
+    }
+    .VPNavBar .search .keys {
+        display: none !important;
+    }
+    .VPNavBar .translations,
+    .VPNavBar .appearance,
+    .VPNavBar .social-links,
+    .VPNavBar .extra {
+        display: none !important;
+    }
+}
+
+/* 766px 以下：汉堡和搜索都靠右 */
+@media (max-width: 766px) {
+    .VPNavBar .content-body {
+        display: flex !important;
+        justify-content: flex-end !important;
+    }
+    .VPNavBar .menu {
+        display: none !important;
+    }
+    .VPNavBar .search {
+        order: 1 !important;
+        margin-right: 8px !important;
+    }
+    .VPNavBar .search .text {
+        display: none !important;
+    }
+    .VPNavBar .search .keys {
+        display: none !important;
+    }
+    .VPNavBar .hamburger {
+        order: 2 !important;
+    }
+    .VPNavBar .translations,
+    .VPNavBar .appearance,
+    .VPNavBar .social-links,
+    .VPNavBar .extra {
+        display: none !important;
+    }
+}
+
 /* 导览下拉 - 移动端右下角小按钮 */
 @media (max-width: 1279px) {
     .VPLocalNavOutlineDropdown {
