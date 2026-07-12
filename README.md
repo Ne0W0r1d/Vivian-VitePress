@@ -1,12 +1,12 @@
 # Vivian
-
 <img src="./public/imgs/vivian.webp" width = "500" height = "500" alt="Firefly" align=right />
 
 <div align="center">
-## 简介
+# 简介
 
 Vivian 是一个一个采用类液态玻璃设计风格的 VitePress 主题，基于原版默认主题魔改，使用 Mimo V2.5 Pro Vibe <br>
 在此基础上，加入了一些符合我要求的设置，配色和名字均取自《绝区零》反舌鸟阵营角色薇薇安（虽然我没有薇薇安）<br>
+</div>
 
 ## 依赖
 ![Node.js >= 22](https://img.shields.io/badge/node.js-%3E%3D22-brightgreen) 
@@ -18,7 +18,6 @@ Vivian 是一个一个采用类液态玻璃设计风格的 VitePress 主题，�
 [![完整 Demo](https://img.shields.io/badge/前往-完整_Demo_站-blue)](https://tux.red)
 [![文档站](https://img.shields.io/badge/前往-文档站-blue)](https://vivian.0w0.red)
 
-</div>
 ## 快速开始
 
 ```bash
