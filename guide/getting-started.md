@@ -3,6 +3,7 @@
 ## 安装
 
 ## 获得源码（请打开菜单栏/菜单右上角的社交媒体按钮进入 DevOps 平台，或者通过以下方式）
+
 ```sh
 git clone https://codeberg.org/ne0w0r1d/vitepress-vivian # Codeberg
 git clone https://gitee.com/ne0w0r1d/vitepress-vivian # Gitee
