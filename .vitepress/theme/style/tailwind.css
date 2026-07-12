@@ -989,32 +989,79 @@
     overflow: visible !important;
 }
 
-/* 导览下拉 - 父容器和子菜单统一固定在右边，跟 Sidebar 按钮对齐 */
-.VPLocalNavOutlineDropdown {
-    position: fixed !important;
-    top: calc(var(--vp-nav-height) + 16px) !important;
-    right: 8px !important;
-    left: auto !important;
-    z-index: calc(var(--vp-z-index-sidebar) + 10) !important;
+/* 导览下拉 - 移动端右下角小按钮 */
+@media (max-width: 1279px) {
+    .VPLocalNavOutlineDropdown {
+        position: fixed !important;
+        bottom: 16px !important;
+        right: 16px !important;
+        top: auto !important;
+        left: auto !important;
+        z-index: calc(var(--vp-z-index-sidebar) + 10) !important;
+    }
+
+    .VPLocalNavOutlineDropdown > button {
+        background-color: color-mix(in srgb, var(--vp-c-bg) 50%, transparent) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(200%) !important;
+        backdrop-filter: blur(20px) saturate(200%) !important;
+        border: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent) !important;
+        border-radius: 50% !important;
+        width: 40px !important;
+        height: 40px !important;
+        padding: 0 !important;
+        font-size: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow:
+            0 2px 8px color-mix(in srgb, var(--main-color) 15%, transparent),
+            0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+        color: var(--vp-c-text-2) !important;
+        cursor: pointer !important;
+        opacity: 0.7 !important;
+        transition: opacity 0.2s ease !important;
+    }
+
+    .VPLocalNavOutlineDropdown > button:hover,
+    .VPLocalNavOutlineDropdown > button.open {
+        opacity: 1 !important;
+    }
+
+    .VPLocalNavOutlineDropdown > button .menu-text {
+        display: none !important;
+    }
+
+    .VPLocalNavOutlineDropdown > button .icon {
+        display: block !important;
+        margin: 0 !important;
+    }
+
+    .VPLocalNavOutlineDropdown .items {
+        position: fixed !important;
+        bottom: 64px !important;
+        right: 16px !important;
+        top: auto !important;
+        left: auto !important;
+        width: fit-content !important;
+        min-width: 200px !important;
+        max-width: 280px !important;
+        background-color: color-mix(in srgb, var(--vp-c-bg) 50%, transparent) !important;
+        -webkit-backdrop-filter: blur(60px) saturate(200%) !important;
+        backdrop-filter: blur(60px) saturate(200%) !important;
+        border: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent) !important;
+        border-radius: 12px !important;
+        box-shadow:
+            0 4px 16px color-mix(in srgb, var(--main-color) 15%, transparent),
+            0 8px 32px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+    }
 }
 
-.VPLocalNavOutlineDropdown .items {
-    position: absolute !important;
-    top: 100% !important;
-    right: 0 !important;
-    left: auto !important;
-    width: fit-content !important;
-    min-width: 200px !important;
-    max-width: 280px !important;
-    margin-top: 4px !important;
-    background-color: color-mix(in srgb, var(--vp-c-bg) 45%, transparent) !important;
-    -webkit-backdrop-filter: blur(60px) saturate(200%) !important;
-    backdrop-filter: blur(60px) saturate(200%) !important;
-    border: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent) !important;
-    border-radius: 12px !important;
-    box-shadow:
-        0 4px 16px color-mix(in srgb, var(--main-color) 15%, transparent),
-        0 8px 32px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+/* PC 端不改 */
+@media (min-width: 1280px) {
+    .VPLocalNavOutlineDropdown > button,
+    .VPLocalNavOutlineDropdown .items {
+        all: revert !important;
+    }
 }
 
 .VPLocalNavOutlineDropdown .header,
