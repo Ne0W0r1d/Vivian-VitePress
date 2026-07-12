@@ -1,7 +1,7 @@
 {
   "name": "vivian",
-  "version": "1.0.0",
-  "description": "A VitePress theme with liquid glass design",
+  "version": "0.1.0-alpha",
+  "description": "A VitePress Theme",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",

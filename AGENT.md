@@ -2,9 +2,9 @@
 
 ## 项目基础信息
 
-**项目名称**：Vivian-VitePress
+**项目名称**：Vivian
 **项目类型**：VitePress 主题
-**设计风格**：液态玻璃（Liquid Glass）
+**设计风格**：现代，流畅为主
 **灵感来源**：《绝区零》薇薇安
 **技术栈**：VitePress + Vue 3 + Tailwind CSS + Twikoo
 
@@ -38,14 +38,15 @@ Vivian/
 
 ### 系统要求
 
-- Node.js >= 18.0.0
-- pnpm >= 8.0.0
+- Node.js >= 22.0.0
+- pnpm >= 9.0.0
+- VitePress >=2
 
 ### 安装步骤
 
 ```bash
 # 克隆项目
-git clone https://github.com/Slepwerks/Vivian.git
+git clone https://gitee.com/ne0w0r1d/vivian-vitepress # 亦可使用 codeberg.org 
 cd Vivian
 
 # 安装依赖
@@ -63,7 +64,7 @@ pnpm preview
 
 ### 开发工具推荐
 
-- **编辑器**：VS Code / WebStorm
+- **编辑器**：VS Code / WebStorm / Kate
 - **浏览器**：Chrome / Firefox（开发者工具）
 - **版本控制**：Git
 
@@ -85,7 +86,7 @@ pnpm preview
 - [ ] 平板端（768px - 960px）：适配布局
 - [ ] PC 端（>= 960px）：悬浮导航和侧边栏
 
-#### 3. 液态玻璃效果测试
+#### 3. 网页效果测试
 
 - [ ] 菜单栏半透明背景
 - [ ] 侧边栏模糊效果
@@ -488,5 +489,5 @@ git commit -m "perf(style): 优化 backdrop-filter 性能"
 
 ---
 
-*此文档由 Vivian-VitePress 主题自动生成*
+*此文档由 Vivian 主题 + 小米 Mimo 自动生成*
 *最后更新：2026年7月12日*
