@@ -137,8 +137,8 @@
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
     border-radius: 16px !important;
     box-shadow:
-        0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent),
-        0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+    0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent),
+    0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
     transition: all 0.3s ease !important;
     height: 100% !important;
 }
@@ -146,8 +146,8 @@
 .VPFeatures .item .VPFeature:hover {
     border-color: var(--main-color) !important;
     box-shadow:
-        0 4px 16px color-mix(in srgb, var(--main-color) 20%, transparent),
-        0 8px 32px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
+    0 4px 16px color-mix(in srgb, var(--main-color) 20%, transparent),
+    0 8px 32px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
     transform: translateY(-4px) !important;
 }
 
@@ -279,8 +279,8 @@
     border-radius: 16px !important;
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
     box-shadow:
-        0 2px 8px color-mix(in srgb, var(--main-color) 15%, transparent),
-        0 4px 16px color-mix(in srgb, var(--main-color) 10%, transparent) !important;
+    0 2px 8px color-mix(in srgb, var(--main-color) 15%, transparent),
+    0 4px 16px color-mix(in srgb, var(--main-color) 10%, transparent) !important;
     outline: none !important;
     overflow: visible !important;
 }
@@ -314,8 +314,8 @@
     border-radius: 16px !important;
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent) !important;
     box-shadow:
-        0 4px 16px color-mix(in srgb, var(--main-color) 15%, transparent),
-        0 8px 32px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+    0 4px 16px color-mix(in srgb, var(--main-color) 15%, transparent),
+    0 8px 32px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
 }
 
 /* 移动端侧边栏悬浮 */
@@ -334,8 +334,8 @@
     border-radius: 16px !important;
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
     box-shadow:
-        0 4px 16px color-mix(in srgb, var(--main-color) 15%, transparent),
-        0 8px 32px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+    0 4px 16px color-mix(in srgb, var(--main-color) 15%, transparent),
+    0 8px 32px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
 }
 
 /* 移动端下拉菜单容器 */
@@ -446,7 +446,7 @@
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
     border-radius: 12px !important;
     box-shadow:
-        0 2px 8px color-mix(in srgb, var(--main-color) 15%, transparent) !important;
+    0 2px 8px color-mix(in srgb, var(--main-color) 15%, transparent) !important;
     transition: all 0.25s ease !important;
 }
 
@@ -454,14 +454,14 @@
 .VPSwitchAppearance:hover {
     border-color: var(--main-color) !important;
     box-shadow:
-        0 4px 12px color-mix(in srgb, var(--main-color) 25%, transparent) !important;
+    0 4px 12px color-mix(in srgb, var(--main-color) 25%, transparent) !important;
 }
 
 .VPSwitch .check,
 .VPSwitchAppearance .check {
     background-color: var(--main-color) !important;
     box-shadow:
-        0 2px 4px color-mix(in srgb, var(--main-color) 30%, transparent) !important;
+    0 2px 4px color-mix(in srgb, var(--main-color) 30%, transparent) !important;
     border-radius: 10px !important;
 }
 
@@ -483,7 +483,7 @@
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent) !important;
     border-radius: 12px !important;
     box-shadow:
-        0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
+    0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
 }
 
 /* ========== 友链页面容器液态玻璃 ========== */
@@ -493,8 +493,8 @@
     backdrop-filter: blur(40px) saturate(200%) !important;
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
     box-shadow:
-        0 4px 16px color-mix(in srgb, var(--main-color) 12%, transparent),
-        0 8px 32px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+    0 4px 16px color-mix(in srgb, var(--main-color) 12%, transparent),
+    0 8px 32px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
 }
 
 .link-details-container {
@@ -523,7 +523,7 @@
     border: none !important;
     border-radius: 10px !important;
     box-shadow:
-        0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
+    0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
     transition: all 0.25s ease !important;
     color: var(--vp-c-text-2) !important;
     padding: 6px 10px !important;
@@ -535,7 +535,7 @@
 .VPNavBarSearchButton:hover {
     background-color: color-mix(in srgb, var(--vp-c-bg) 60%, transparent) !important;
     box-shadow:
-        0 4px 12px color-mix(in srgb, var(--main-color) 20%, transparent) !important;
+    0 4px 12px color-mix(in srgb, var(--main-color) 20%, transparent) !important;
     color: var(--vp-c-text-1) !important;
 }
 
@@ -559,7 +559,7 @@
         border-radius: 6px !important;
         padding: 2px 6px !important;
         box-shadow:
-            0 2px 6px color-mix(in srgb, var(--main-color) 15%, transparent) !important;
+        0 2px 6px color-mix(in srgb, var(--main-color) 15%, transparent) !important;
     }
 
     .VPNavBarSearchButton .keys kbd {
@@ -583,8 +583,8 @@
     backdrop-filter: blur(60px) saturate(200%) !important;
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent) !important;
     box-shadow:
-        0 8px 32px color-mix(in srgb, var(--main-color) 15%, transparent),
-        0 16px 64px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+    0 8px 32px color-mix(in srgb, var(--main-color) 15%, transparent),
+    0 16px 64px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
     animation: searchShellIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     transform-origin: top center;
 }
@@ -746,8 +746,8 @@
     border-radius: 12px !important;
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
     box-shadow:
-        0 2px 8px color-mix(in srgb, var(--main-color) 10%, transparent),
-        0 4px 16px color-mix(in srgb, var(--main-color) 6%, transparent) !important;
+    0 2px 8px color-mix(in srgb, var(--main-color) 10%, transparent),
+    0 4px 16px color-mix(in srgb, var(--main-color) 6%, transparent) !important;
     transition: all 0.25s ease !important;
     padding: 16px 20px !important;
 }
@@ -848,7 +848,7 @@
     background-color: color-mix(in srgb, var(--main-color) 85%, transparent) !important;
     border-color: color-mix(in srgb, var(--main-color) 60%, transparent) !important;
     box-shadow:
-        0 4px 12px color-mix(in srgb, var(--main-color) 30%, transparent) !important;
+    0 4px 12px color-mix(in srgb, var(--main-color) 30%, transparent) !important;
     color: #fff !important;
 }
 
@@ -856,7 +856,7 @@
     background-color: var(--main-color) !important;
     border-color: var(--main-color) !important;
     box-shadow:
-        0 8px 24px color-mix(in srgb, var(--main-color) 40%, transparent) !important;
+    0 8px 24px color-mix(in srgb, var(--main-color) 40%, transparent) !important;
     transform: translateY(-2px);
 }
 
@@ -864,13 +864,13 @@
     background-color: color-mix(in srgb, var(--vp-c-bg) 50%, transparent) !important;
     border-color: color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
     box-shadow:
-        0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
+    0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
 }
 
 .VPButton.alt:hover {
     border-color: var(--main-color) !important;
     box-shadow:
-        0 4px 16px color-mix(in srgb, var(--main-color) 20%, transparent) !important;
+    0 4px 16px color-mix(in srgb, var(--main-color) 20%, transparent) !important;
     transform: translateY(-2px);
 }
 
@@ -882,16 +882,16 @@
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
     border-radius: 16px !important;
     box-shadow:
-        0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent),
-        0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+    0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent),
+    0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
     transition: all 0.3s ease !important;
 }
 
 .VPFeature.link:hover {
     border-color: var(--main-color) !important;
     box-shadow:
-        0 4px 16px color-mix(in srgb, var(--main-color) 20%, transparent),
-        0 8px 32px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
+    0 4px 16px color-mix(in srgb, var(--main-color) 20%, transparent),
+    0 8px 32px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
     transform: translateY(-4px) !important;
 }
 
@@ -931,16 +931,16 @@
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
     border-radius: 12px !important;
     box-shadow:
-        0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent),
-        0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+    0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent),
+    0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
     transition: all 0.25s ease !important;
 }
 
 .pager-link:hover {
     border-color: var(--main-color) !important;
     box-shadow:
-        0 4px 12px color-mix(in srgb, var(--main-color) 20%, transparent),
-        0 8px 24px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
+    0 4px 12px color-mix(in srgb, var(--main-color) 20%, transparent),
+    0 8px 24px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
     transform: translateY(-2px) !important;
 }
 
@@ -974,8 +974,8 @@
     border-radius: 12px !important;
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
     box-shadow:
-        0 2px 8px color-mix(in srgb, var(--main-color) 15%, transparent),
-        0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+    0 2px 8px color-mix(in srgb, var(--main-color) 15%, transparent),
+    0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
     padding: 16px !important;
     border-left: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
     overflow: visible !important;
@@ -989,13 +989,24 @@
     overflow: visible !important;
 }
 
-/* 移动端导览下拉 */
-.VPLocalNavOutlineDropdown .items {
+/* 导览下拉 - 父容器和子菜单统一固定在右边，跟 Sidebar 按钮对齐 */
+.VPLocalNavOutlineDropdown {
+    position: fixed !important;
+    top: calc(var(--vp-nav-height) + 16px) !important;
     right: 8px !important;
     left: auto !important;
+    z-index: calc(var(--vp-z-index-sidebar) + 10) !important;
+}
+
+.VPLocalNavOutlineDropdown .items {
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
     width: fit-content !important;
+    min-width: 200px !important;
     max-width: 280px !important;
-    overflow-x: auto !important;
+    margin-top: 4px !important;
     background-color: color-mix(in srgb, var(--vp-c-bg) 45%, transparent) !important;
     -webkit-backdrop-filter: blur(60px) saturate(200%) !important;
     backdrop-filter: blur(60px) saturate(200%) !important;
@@ -1031,9 +1042,9 @@
     .VPNavBar {
         border-radius: 20px;
         box-shadow:
-            0 2px 4px color-mix(in srgb, var(--main-color) 20%, transparent),
-            0 4px 8px color-mix(in srgb, var(--main-color) 15%, transparent),
-            0 8px 16px color-mix(in srgb, var(--main-color) 10%, transparent);
+        0 2px 4px color-mix(in srgb, var(--main-color) 20%, transparent),
+        0 4px 8px color-mix(in srgb, var(--main-color) 15%, transparent),
+        0 8px 16px color-mix(in srgb, var(--main-color) 10%, transparent);
         border: 1px solid color-mix(in srgb, var(--vp-c-border) 70%, transparent) !important;
         background-color: color-mix(in srgb, var(--vp-c-bg) 40%, transparent) !important;
     }
@@ -1061,9 +1072,9 @@
         padding: 16px !important;
         border-radius: 20px;
         box-shadow:
-            0 2px 4px color-mix(in srgb, var(--main-color) 20%, transparent),
-            0 4px 8px color-mix(in srgb, var(--main-color) 15%, transparent),
-            0 8px 16px color-mix(in srgb, var(--main-color) 10%, transparent) !important;
+        0 2px 4px color-mix(in srgb, var(--main-color) 20%, transparent),
+        0 4px 8px color-mix(in srgb, var(--main-color) 15%, transparent),
+        0 8px 16px color-mix(in srgb, var(--main-color) 10%, transparent) !important;
         border: 1px solid color-mix(in srgb, var(--vp-c-border) 70%, transparent) !important;
         background-color: color-mix(in srgb, var(--vp-c-bg) 30%, transparent) !important;
     }
@@ -1074,16 +1085,16 @@
     background-color: color-mix(in srgb, var(--vp-c-bg) 55%, transparent) !important;
     border-color: color-mix(in srgb, var(--vp-c-border) 30%, transparent) !important;
     box-shadow:
-        0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent),
-        0 8px 32px color-mix(in srgb, var(--main-color) 5%, transparent) !important;
+    0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent),
+    0 8px 32px color-mix(in srgb, var(--main-color) 5%, transparent) !important;
 }
 
 .dark .VPSidebar {
     background-color: color-mix(in srgb, var(--vp-c-bg) 55%, transparent) !important;
     border-color: color-mix(in srgb, var(--vp-c-border) 30%, transparent) !important;
     box-shadow:
-        0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent),
-        0 8px 32px color-mix(in srgb, var(--main-color) 5%, transparent) !important;
+    0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent),
+    0 8px 32px color-mix(in srgb, var(--main-color) 5%, transparent) !important;
 }
 
 /* 深色模式下拉菜单 */
@@ -1235,13 +1246,13 @@
         border: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
         border-radius: 16px !important;
         box-shadow:
-            0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent),
-            0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+        0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent),
+        0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
         &:hover {
             border-color: var(--main-color) !important;
             box-shadow:
-                0 4px 12px color-mix(in srgb, var(--main-color) 20%, transparent),
-                0 8px 24px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
+            0 4px 12px color-mix(in srgb, var(--main-color) 20%, transparent),
+            0 8px 24px color-mix(in srgb, var(--main-color) 12%, transparent) !important;
             transform: translateY(-2px) !important;
         }
     }
@@ -1586,8 +1597,8 @@
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 30%, transparent) !important;
     border-radius: 12px !important;
     box-shadow:
-        0 2px 8px color-mix(in srgb, var(--main-color) 8%, transparent),
-        0 4px 16px color-mix(in srgb, var(--main-color) 5%, transparent) !important;
+    0 2px 8px color-mix(in srgb, var(--main-color) 8%, transparent),
+    0 4px 16px color-mix(in srgb, var(--main-color) 5%, transparent) !important;
     overflow: hidden !important;
 }
 
@@ -1658,8 +1669,8 @@
     background-color: color-mix(in srgb, var(--vp-code-block-bg) 90%, transparent) !important;
     border-color: color-mix(in srgb, var(--vp-c-border) 20%, transparent) !important;
     box-shadow:
-        0 2px 8px color-mix(in srgb, #000 15%, transparent),
-        0 4px 16px color-mix(in srgb, #000 8%, transparent) !important;
+    0 2px 8px color-mix(in srgb, #000 15%, transparent),
+    0 4px 16px color-mix(in srgb, #000 8%, transparent) !important;
 }
 
 .dark .vp-doc div[class*='language-'] > span.lang {
