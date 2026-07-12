@@ -21,8 +21,6 @@ Vivian 是一个现代，流畅为主设计风格的 VitePress 主题。
 
 ## 画饼
 
-- 实现代码框美化
-
 ## 快速开始
 
 请参阅 [快速开始指南](/guide/getting-started)。

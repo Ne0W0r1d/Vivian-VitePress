@@ -83,6 +83,7 @@ export default defineConfig({
           { text: '快速开始', link: '/guide/getting-started' },
           { text: "Twikoo 集成", link: '/guide/twikoo'},
           { text: "友链", link: '/guide/links'},
+          { text: "代码高亮", link: '/guide/highlight'},
         ],
       },
       {
@@ -94,6 +95,13 @@ export default defineConfig({
       },
 
     ]
+  },
+  markdown: {
+    theme: {
+      light: 'everforest-light',
+      dark: 'everforest-dark'
+    },
+    lineNumbers: true
   },
   vite: {
     plugins: [tailwindcss()]

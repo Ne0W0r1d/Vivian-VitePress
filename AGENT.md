@@ -289,6 +289,38 @@ vivianLogo: {
 | `height` | `number` | `24` | 图标高度 |
 | `emoji` | `string` | - | Emoji 图标（优先级高于 src） |
 
+### 代码块配置
+
+Vivian 使用 Shiki 进行代码高亮，默认配置了 `github-light` 和 `github-dark` 主题。
+
+在 `.vitepress/config.mts` 中配置：
+
+```typescript
+export default defineConfig({
+  markdown: {
+    theme: {
+      light: 'github-light', // 浅色模式主题
+      dark: 'github-dark'    // 深色模式主题
+    },
+    lineNumbers: true // 显示行号
+  }
+})
+```
+
+**支持的主题：**
+- `github-light` / `github-dark`
+- `one-dark-pro` / `one-light`
+- `dracula` / `nord`
+- 更多主题请参考 [Shiki 主题列表](https://github.com/shikijs/shiki/blob/main/docs/themes.md)
+
+**配置选项：**
+
+| 选项 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `theme.light` | `string` | `'github-light'` | 浅色模式主题 |
+| `theme.dark` | `string` | `'github-dark'` | 深色模式主题 |
+| `lineNumbers` | `boolean` | `true` | 是否显示行号 |
+
 ### Twikoo 评论系统
 
 在 `.vitepress/config.mts` 中配置：
