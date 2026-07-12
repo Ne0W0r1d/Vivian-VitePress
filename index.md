@@ -11,6 +11,9 @@ hero:
     - theme: brand
       text: 快速开始
       link: /guide/
+    - theme: alt
+      text: 查看完整 Demo（含评论系统）
+      link: https://tux.red
 features:
   - icon: 🎨
     title: 类液态玻璃设计
