@@ -80,6 +80,7 @@ export default defineConfig({
         text: '指南',
         items: [
           { text: '介绍', link: '/guide/' },
+          { text: '更新日志', link: '/update' },
           { text: '快速开始', link: '/guide/getting-started' },
           { text: "Twikoo 集成", link: '/guide/twikoo'},
           { text: "友链", link: '/guide/links'},

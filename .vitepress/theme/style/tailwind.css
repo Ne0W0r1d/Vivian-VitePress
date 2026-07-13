@@ -988,8 +988,8 @@
 /* ========== 自定义滚动条 ========== */
 /* 整体网页滚动条 */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -998,7 +998,7 @@
 
 ::-webkit-scrollbar-thumb {
     background-color: color-mix(in srgb, var(--vp-c-border) 60%, transparent);
-    border-radius: 4px;
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -1008,12 +1008,13 @@
 /* 侧边栏滚动条 - 容器内 */
 .VPSidebar {
     overflow-y: auto !important;
+    scrollbar-gutter: stable;
     scrollbar-width: thin;
     scrollbar-color: color-mix(in srgb, var(--vp-c-border) 50%, transparent) transparent;
 }
 
 .VPSidebar::-webkit-scrollbar {
-    width: 4px;
+    width: 10px;
 }
 
 .VPSidebar::-webkit-scrollbar-track {
@@ -1022,18 +1023,21 @@
 
 .VPSidebar::-webkit-scrollbar-thumb {
     background-color: color-mix(in srgb, var(--vp-c-border) 50%, transparent);
-    border-radius: 2px;
+    border-radius: 3px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
 }
 
 /* Aside 滚动条 - 容器内 */
 .VPDoc .aside-container {
     overflow-y: auto !important;
+    scrollbar-gutter: stable;
     scrollbar-width: thin;
     scrollbar-color: color-mix(in srgb, var(--vp-c-border) 50%, transparent) transparent;
 }
 
 .VPDoc .aside-container::-webkit-scrollbar {
-    width: 4px;
+    width: 10px;
 }
 
 .VPDoc .aside-container::-webkit-scrollbar-track {
@@ -1043,6 +1047,8 @@
 .VPDoc .aside-container::-webkit-scrollbar-thumb {
     background-color: color-mix(in srgb, var(--vp-c-border) 50%, transparent);
     border-radius: 2px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
 }
 
 /* 手机端 Aside 支持水平滚动 */
@@ -1050,6 +1056,25 @@
     .VPDoc .aside-container {
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* PC 端滚动条加宽，更明显 */
+@media (min-width: 960px) {
+    .VPSidebar::-webkit-scrollbar {
+        width: 14px;
+    }
+    .VPSidebar::-webkit-scrollbar-thumb {
+        border: 3px solid transparent;
+        border-radius: 4px;
+    }
+
+    .VPDoc .aside-container::-webkit-scrollbar {
+        width: 14px;
+    }
+    .VPDoc .aside-container::-webkit-scrollbar-thumb {
+        border: 3px solid transparent;
+        border-radius: 3px;
     }
 }
 
@@ -1130,35 +1155,35 @@
         background-color: color-mix(in srgb, var(--vp-c-bg) 50%, transparent) !important;
         -webkit-backdrop-filter: blur(20px) saturate(200%) !important;
         backdrop-filter: blur(20px) saturate(200%) !important;
-        border: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent) !important;
-        border-radius: 50% !important;
-        width: 40px !important;
-        height: 40px !important;
-        padding: 0 !important;
-        font-size: 0 !important;
+        border: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
+        border-radius: 12px !important;
+        padding: 8px 16px !important;
+        font-size: 13px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
+        gap: 6px !important;
         box-shadow:
-            0 2px 8px color-mix(in srgb, var(--main-color) 15%, transparent),
-            0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+            0 2px 8px color-mix(in srgb, var(--main-color) 15%, transparent) !important;
         color: var(--vp-c-text-2) !important;
         cursor: pointer !important;
-        opacity: 0.7 !important;
-        transition: opacity 0.2s ease !important;
+        transition: all 0.25s ease !important;
     }
 
     .VPLocalNavOutlineDropdown > button:hover,
     .VPLocalNavOutlineDropdown > button.open {
-        opacity: 1 !important;
+        border-color: var(--main-color) !important;
+        box-shadow:
+            0 4px 16px color-mix(in srgb, var(--main-color) 20%, transparent) !important;
+        color: var(--vp-c-text-1) !important;
     }
 
     .VPLocalNavOutlineDropdown > button .menu-text {
-        display: none !important;
+        display: inline !important;
     }
 
     .VPLocalNavOutlineDropdown > button .icon {
-        display: block !important;
+        display: inline-block !important;
         margin: 0 !important;
     }
 
@@ -1857,4 +1882,18 @@
 .dark .vp-doc :not(pre) > code {
     background-color: color-mix(in srgb, var(--main-color) 15%, transparent) !important;
     border-color: color-mix(in srgb, var(--main-color) 25%, transparent) !important;
+}
+
+/* ========== 移动端容器按钮液态玻璃 ========== */
+@media (max-width: 959px) {
+    [data-v-090776b2] {
+        background-color: color-mix(in srgb, var(--vp-c-bg) 45%, transparent) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(200%) !important;
+        backdrop-filter: blur(20px) saturate(200%) !important;
+        border: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent) !important;
+        border-radius: 12px !important;
+        box-shadow:
+            0 2px 8px color-mix(in srgb, var(--main-color) 12%, transparent),
+            0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+    }
 }
