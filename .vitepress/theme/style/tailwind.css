@@ -978,15 +978,83 @@
     0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
     padding: 16px !important;
     border-left: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
-    overflow: visible !important;
+}
+
+/* marker 微调 - 垂直居中 */
+.VPDocAsideOutline .outline-marker {
+    transform: translateY(100%) !important;
+}
+
+/* ========== 自定义滚动条 ========== */
+/* 整体网页滚动条 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: color-mix(in srgb, var(--vp-c-border) 60%, transparent);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in srgb, var(--vp-c-border) 80%, transparent);
+}
+
+/* 侧边栏滚动条 - 容器内 */
+.VPSidebar {
+    overflow-y: auto !important;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--vp-c-border) 50%, transparent) transparent;
+}
+
+.VPSidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.VPSidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.VPSidebar::-webkit-scrollbar-thumb {
+    background-color: color-mix(in srgb, var(--vp-c-border) 50%, transparent);
+    border-radius: 2px;
+}
+
+/* Aside 滚动条 - 容器内 */
+.VPDoc .aside-container {
+    overflow-y: auto !important;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--vp-c-border) 50%, transparent) transparent;
+}
+
+.VPDoc .aside-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.VPDoc .aside-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.VPDoc .aside-container::-webkit-scrollbar-thumb {
+    background-color: color-mix(in srgb, var(--vp-c-border) 50%, transparent);
+    border-radius: 2px;
+}
+
+/* 手机端 Aside 支持水平滚动 */
+@media (max-width: 959px) {
+    .VPDoc .aside-container {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 .VPDoc .aside-curtain {
     display: none !important;
-}
-
-.VPDoc .aside-container {
-    overflow: visible !important;
 }
 
 /* 768px - 959px：搜索变按钮靠右，菜单靠左 */
