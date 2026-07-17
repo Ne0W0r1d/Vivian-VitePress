@@ -2,7 +2,7 @@
 
 ## 前言
 
-Vivian 使用 Shiki 进行代码高亮，默认配置了 `everforest-light` 和 `everforest-dark` 主题。
+Vivian 使用 VitePress 默认使用的。 Shiki 进行代码高亮，默认配置了 `everforest-light` 和 `everforest-dark` 主题。
 
 ## 配置
 
