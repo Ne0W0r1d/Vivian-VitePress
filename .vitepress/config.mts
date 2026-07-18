@@ -53,7 +53,7 @@ export default defineConfig({
       linkText: '返回首页'
     },
     footer: {
-      message: 'Powered by VitePress Vivian',
+      message: 'Powered by VitePress x Vivian',
       copyright: 'Copyright © 2026 Ne0W0r1d'
     },
     // Twikoo 评论系统配置
