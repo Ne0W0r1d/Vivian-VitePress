@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, watch, nextTick } from 'vue'
+import { onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { computed } from 'vue'
 import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
@@ -59,6 +59,67 @@ function wrapTables() {
 onMounted(wrapTables)
 watch(() => route.path, () => {
   nextTick(wrapTables)
+})
+
+// 移动端下拉菜单 outline-link 高亮同步
+// VitePress 的 useActiveAnchor 只给 PC 侧边导览加 .active，
+// 这里手动同步到移动端 VPLocalNavOutlineDropdown 的 outline-link
+let prevDropdownActive: Element | null = null
+function syncDropdownActiveLink() {
+  const dropdown = document.querySelector('.VPLocalNavOutlineDropdown .outline')
+  if (!dropdown) return
+  const links = dropdown.querySelectorAll('a.outline-link[href]')
+  if (!links.length) return
+
+  // 找到当前视口内最近的标题
+  let activeLink: Element | null = null
+  for (const link of links) {
+    const href = (link as HTMLAnchorElement).getAttribute('href')
+    if (!href || !href.startsWith('#')) continue
+    const target = document.getElementById(href.slice(1))
+    if (!target) continue
+    const rect = target.getBoundingClientRect()
+    if (rect.top <= 100) {
+      activeLink = link
+    }
+  }
+
+  if (prevDropdownActive) {
+    prevDropdownActive.classList.remove('active')
+  }
+  if (activeLink) {
+    activeLink.classList.add('active')
+    prevDropdownActive = activeLink
+  }
+}
+const throttledSync = (() => {
+  let ticking = false
+  return () => {
+    if (!ticking) {
+      ticking = true
+      requestAnimationFrame(() => {
+        syncDropdownActiveLink()
+        ticking = false
+      })
+    }
+  }
+})()
+onMounted(() => {
+  window.addEventListener('scroll', throttledSync, { passive: true })
+  syncDropdownActiveLink()
+  // 下拉菜单打开时重新同步（下拉关闭后 .outline 消失，.active 丢失）
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.VPLocalNavOutlineDropdown > button')
+    if (btn) {
+      setTimeout(syncDropdownActiveLink, 50)
+    }
+  })
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', throttledSync)
+})
+watch(() => route.path, () => {
+  nextTick(syncDropdownActiveLink)
 })
 </script>
 
@@ -208,14 +269,21 @@ watch(() => route.path, () => {
   border-top: none !important;
 }
 
-/* Footer 上方分割线：短一点，不延伸到侧边导览 */
+/* Footer 上方分割线：缩短 */
 .VPFooter::before {
   content: '';
   display: block;
-  width: 960px;
+  width: 200px;
   max-width: calc(100% - 48px);
   margin: -32px auto 0;
-  border-top: 1px solid rgba(70, 71, 87, 0.4);
+  border-top: 1px solid color-mix(in srgb, var(--vp-c-border) 30%, transparent);
+}
+
+/* Footer 文字淡化 */
+.VPFooter .message,
+.VPFooter .copyright {
+  color: var(--vp-c-text-3) !important;
+  font-size: 13px !important;
 }
 
 /* 让 docs 页面也显示 Footer */

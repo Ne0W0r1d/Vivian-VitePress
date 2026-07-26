@@ -1,11 +1,10 @@
 # Vivian
-<img src="./public/imgs/vivian.webp" width = "500" height = "500" alt="Firefly" align=right />
-
-## Vivian 简介
 <div align="center">
+<img src="./public/imgs/vivian.webp" width = "300" height = "300" alt="Vivian" align=right />
+</div>
+## Vivian 简介
 Vivian 是一个现代，流畅为主设计风格的 VitePress 主题，基于原版默认主题 + Tailwind CSS 魔改，使用 Mimo V2.5 Pro 实现 <br>
 它是 [Can We Tux](https://tux.red) 文档项目的衍生，加入了一些符合我要求的设置，配色和名字均取自《绝区零》反舌鸟阵营角色薇薇安（虽然我没有薇薇安）<br>
-</div>
 
 ## 依赖
 ![Node.js >= 22](https://img.shields.io/badge/node.js-%3E%3D22-brightgreen) 

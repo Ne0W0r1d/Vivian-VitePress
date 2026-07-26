@@ -175,9 +175,9 @@
 }
 
 
-/* ========== 隐藏默认深浅色切换 ========== */
+/* ========== 隐藏默认深浅色切换（保留 Extra 菜单里的） ========== */
 .VPNavBarAppearance,
-.VPNavBar .appearance,
+.VPNavBar > .wrapper > .content > .content-body > .appearance,
 .VPNavScreen .appearance {
     display: none !important;
 }
@@ -195,12 +195,8 @@
     margin-top: 12px;
 }
 
-/* ========== PC 端：显示 PC 端深浅色切换，隐藏移动端版本 ========== */
+/* ========== PC 端：隐藏移动端版本 ========== */
 @media (min-width: 960px) {
-    .desktop-theme-switch {
-        display: flex !important;
-    }
-
     .mobile-theme-switch {
         display: none !important;
     }
@@ -644,6 +640,7 @@
     border-radius: 10px !important;
     margin: 12px 16px !important;
     gap: 4px !important;
+    align-items: center !important;
 }
 
 .VPLocalSearchBox .search-bar:focus-within {
@@ -669,6 +666,13 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    flex-shrink: 0 !important;
+}
+
+.VPLocalSearchBox .search-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
 }
 
 .VPLocalSearchBox .search-icon {
@@ -972,17 +976,62 @@
     -webkit-backdrop-filter: blur(40px) saturate(200%) !important;
     backdrop-filter: blur(40px) saturate(200%) !important;
     border-radius: 12px !important;
-    border: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
+    border: 1px solid color-mix(in srgb, var(--vp-c-border) 80%, transparent) !important;
     box-shadow:
     0 2px 8px color-mix(in srgb, var(--main-color) 15%, transparent),
-    0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+    0 4px 16px color-mix(in srgb, var(--main-color) 8%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--vp-c-border) 30%, transparent) !important;
     padding: 16px !important;
-    border-left: 1px solid color-mix(in srgb, var(--vp-c-border) 50%, transparent) !important;
 }
 
-/* marker 微调 - 垂直居中 */
+/* 章节内容区域滚动 */
+.VPDocAsideOutline .content {
+    overflow-y: auto !important;
+    max-height: calc(100vh - var(--vp-nav-height) - var(--vp-footer-height) - 80px) !important;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--vp-c-border) 40%, transparent) transparent;
+}
+
+.VPDocAsideOutline .content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.VPDocAsideOutline .content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.VPDocAsideOutline .content::-webkit-scrollbar-thumb {
+    background-color: color-mix(in srgb, var(--vp-c-border) 40%, transparent);
+    border-radius: 2px;
+}
+
+/* PC 端隐藏 outline-marker */
 .VPDocAsideOutline .outline-marker {
-    transform: translateY(100%) !important;
+    display: none !important;
+}
+
+/* 章节链接高亮（PC 侧边 + 手机下拉通用） */
+.VPDocAsideOutline .outline-link,
+.VPLocalNavOutlineDropdown .outline-link {
+    border-radius: 6px !important;
+    padding: 4px 8px !important;
+    margin-left: -8px !important;
+    transition: all 0.2s ease !important;
+}
+
+.VPDocAsideOutline .outline-link:hover,
+.VPLocalNavOutlineDropdown .outline-link:hover {
+    color: var(--main-color) !important;
+    background-color: color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+}
+
+.VPDocAsideOutline .outline-link.active,
+.VPLocalNavOutlineDropdown .outline-link.active {
+    color: var(--main-color) !important;
+    font-weight: 600 !important;
+    background-color: color-mix(in srgb, var(--main-color) 12%, transparent) !important;
+    border-left: 2px solid var(--main-color) !important;
+    padding-left: 6px !important;
 }
 
 /* ========== 自定义滚动条 ========== */
@@ -1028,29 +1077,6 @@
     background-clip: padding-box;
 }
 
-/* Aside 滚动条 - 容器内 */
-.VPDoc .aside-container {
-    overflow-y: auto !important;
-    scrollbar-gutter: stable;
-    scrollbar-width: thin;
-    scrollbar-color: color-mix(in srgb, var(--vp-c-border) 50%, transparent) transparent;
-}
-
-.VPDoc .aside-container::-webkit-scrollbar {
-    width: 10px;
-}
-
-.VPDoc .aside-container::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.VPDoc .aside-container::-webkit-scrollbar-thumb {
-    background-color: color-mix(in srgb, var(--vp-c-border) 50%, transparent);
-    border-radius: 2px;
-    border: 2px solid transparent;
-    background-clip: padding-box;
-}
-
 /* 手机端 Aside 支持水平滚动 */
 @media (max-width: 959px) {
     .VPDoc .aside-container {
@@ -1082,11 +1108,11 @@
     display: none !important;
 }
 
-/* 768px - 959px：搜索变按钮靠右，菜单靠左 */
+/* 768px - 959px：搜索靠右，菜单靠左，Extra 保留 */
 @media (min-width: 768px) and (max-width: 959px) {
     .VPNavBar .content-body {
         display: flex !important;
-        justify-content: flex-start !important;
+        justify-content: flex-end !important;
     }
     .VPNavBar .menu {
         order: 1 !important;
@@ -1094,7 +1120,6 @@
     }
     .VPNavBar .search {
         order: 2 !important;
-        margin-left: auto !important;
     }
     .VPNavBar .search .text {
         display: none !important;
@@ -1102,10 +1127,69 @@
     .VPNavBar .search .keys {
         display: none !important;
     }
-    .VPNavBar .translations,
-    .VPNavBar .appearance,
-    .VPNavBar .social-links,
+    /* 显示自己的 desktop-theme-switch，放在 Extra 按钮左边 */
+    .desktop-theme-switch {
+        display: flex !important;
+        order: 3 !important;
+        margin-right: 4px !important;
+    }
+    /* Extra 按钮放最右边 */
     .VPNavBar .extra {
+        order: 4 !important;
+    }
+    /* 隐藏 Extra 菜单里的原生 Appearance */
+    .VPNavBarExtra .item.appearance {
+        display: none !important;
+    }
+    /* 只隐藏 navbar 主体里的，不隐藏 Extra 菜单里的 */
+    .VPNavBar > .wrapper > .content > .content-body > .translations,
+    .VPNavBar > .wrapper > .content > .content-body > .appearance,
+    .VPNavBar > .wrapper > .content > .content-body > .social-links {
+        display: none !important;
+    }
+}
+
+/* Extra 下拉菜单液态玻璃 */
+.VPNavBarExtra > .menu {
+    background-color: color-mix(in srgb, var(--vp-c-bg) 50%, transparent) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(200%) !important;
+    backdrop-filter: blur(20px) saturate(200%) !important;
+    border: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent) !important;
+    border-radius: 12px !important;
+    box-shadow:
+        0 4px 16px color-mix(in srgb, var(--main-color) 15%, transparent),
+        0 8px 32px color-mix(in srgb, var(--main-color) 8%, transparent) !important;
+    transition: opacity 0.25s, visibility 0.25s !important;
+    transform: none !important;
+    will-change: auto !important;
+    isolation: isolate !important;
+}
+
+.VPNavBarExtra > .menu > .VPMenu {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.VPNavBarExtra > .menu > .VPMenu .item {
+    border-radius: 8px !important;
+    transition: background-color 0.2s ease !important;
+}
+
+.VPNavBarExtra > .menu > .VPMenu .item:hover {
+    background-color: color-mix(in srgb, var(--main-color) 10%, transparent) !important;
+}
+
+/* 780-959px：搜索按钮放 NavBar 右边，Appearance 左边 */
+@media (min-width: 780px) and (max-width: 959px) {
+    .VPNavBar .search {
+        order: 2 !important;
+        margin-right: 4px !important;
+    }
+    .VPNavBar .search .text {
+        display: none !important;
+    }
+    .VPNavBar .search .keys {
         display: none !important;
     }
 }
@@ -1455,12 +1539,22 @@
         }
     }
 
-    /* 回复评论 */
+    /* 回复评论：扁平化，不要独立容器 */
     .tk-replies-expand > .tk-comment {
-        background-color: color-mix(in srgb, var(--vp-c-bg) 35%, transparent) !important;
-        -webkit-backdrop-filter: blur(30px) saturate(200%) !important;
-        backdrop-filter: blur(30px) saturate(200%) !important;
-        border-radius: 12px !important;
+        background-color: transparent !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        border-top: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent) !important;
+        box-shadow: none !important;
+        padding-top: 12px !important;
+        margin-top: 12px !important;
+        &:hover {
+            transform: none !important;
+            box-shadow: none !important;
+            border-top-color: var(--main-color) !important;
+        }
     }
 
     /* 输入框液态玻璃 */
@@ -1697,14 +1791,16 @@
         }
     }
     .tk-replies-expand > .tk-comment {
-        @apply pt-4;
-        border-top: 1px solid color-mix(in srgb, var(--vp-c-border) 60%, transparent);
-        border-radius: 0;
-        box-shadow: none;
+        @apply pt-3;
+        background-color: transparent !important;
+        border: none !important;
+        border-top: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent) !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
         &:hover {
-            transform: none;
-            box-shadow: none;
-            border-top-color: var(--main-color);
+            transform: none !important;
+            box-shadow: none !important;
+            border-top-color: var(--main-color) !important;
         }
     }
     .tk-content p {
