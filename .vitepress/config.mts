@@ -69,6 +69,7 @@ export default defineConfig({
       { text: '主页', link: '/' },
       { text: '文档', link: '/guide/' },
       { text: '友链', link: '/links.md' },
+      { text: '捐赠', link: 'https://0w0.red/sponsor/' },
 
     ],
     socialLinks: [

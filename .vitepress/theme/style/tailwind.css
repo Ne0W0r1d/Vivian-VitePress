@@ -1280,6 +1280,10 @@
         width: fit-content !important;
         min-width: 200px !important;
         max-width: 280px !important;
+        max-height: calc(100vh - 200px) !important;
+        overflow-y: auto !important;
+        scrollbar-width: thin;
+        scrollbar-color: color-mix(in srgb, var(--vp-c-border) 40%, transparent) transparent;
         background-color: color-mix(in srgb, var(--vp-c-bg) 50%, transparent) !important;
         -webkit-backdrop-filter: blur(60px) saturate(200%) !important;
         backdrop-filter: blur(60px) saturate(200%) !important;
