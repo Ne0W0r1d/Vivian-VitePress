@@ -43,10 +43,22 @@ outLinks:
 
 ### 文本编辑（需要有 Vue 基础）
 
-前往 `.vitepress/theme/components/WLink/index.vue` 编辑，默认 Weizwz 的方案就够用，如果你想 Vibe 新的，或者觉得像个性化，则改动以下部分的内容
+前往 `.vitepress/theme/components/WLink/index.vue` 编辑，默认 Weizwz 的方案就够用，如果你想 Vibe 新的，或者觉得像个性化，则改动以下部分的内容。
 
 ```vue
 <template>
 <!--……-->
 </template>
 ```
+
+如果单纯只想改文案，则直接跳转到
+```vue
+// 从 themeConfig.wlink 读取文案，提供默认值
+const config = computed(() => {
+<!--……-->
+    ],
+  }
+})
+```
+
+这个区域修改即可

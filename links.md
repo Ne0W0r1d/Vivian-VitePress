@@ -12,9 +12,14 @@ links:
         link: https://0w0.red
         avatar: https://0w0.red/images/ava.png
         descr: 继续沉醉，自我迂回
+      - name: Can We Tux
+        link: https://tux.red
+        avatar: https://tux.red/imgs/icons.webp
+        descr: Yet Another Linux Compatibility Doc
+
 outLinks:
   - title: 鸣谢
-    desc: 感谢如下网站，为 Can We Tux 贡献力量📩
+    desc: 感谢如下网站，为 Vivian 贡献力量📩
     list:
       - name: VitePress
         link: https://vitepress.dev/zh/
