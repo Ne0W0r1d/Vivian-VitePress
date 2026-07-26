@@ -1,8 +1,6 @@
 # Vivian
 
-<div align="center">
-<img src="./public/imgs/vivian.webp" width = "300" height = "300" alt="Vivian" align=right />
-</div>
+![Vivian](./public/imgs/vivian.webp)
 
 ## Vivian 简介
 Vivian 是一个现代，流畅为主设计风格的 VitePress 主题，基于原版默认主题 + Tailwind CSS 魔改，使用 Mimo V2.5 Pro 实现 <br>
