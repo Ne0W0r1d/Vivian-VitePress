@@ -73,7 +73,7 @@ export default defineConfig({
     ],
     socialLinks: [
       { icon: 'gitee', link: 'https://gitee.com/ne0w0r1d/vivian-vitepress' },
-      { icon: 'codeberg', link: 'https://codeberg.org/ne0w0r1d/vivian-vitepress' },
+      { icon: 'github', link: 'https://github.com/ne0w0r1d/vivian-vitepress' },
     ],
     sidebar: [
       {
