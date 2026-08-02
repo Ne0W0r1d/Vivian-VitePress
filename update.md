@@ -1,5 +1,18 @@
 # 更新日志
 
+## 2026-08-02
+
+- `WLink` 友链系统
+    - 将文案配置抽离至独立文件 `config.ts`，主题更新后无需重新设置
+    - 支持通过 `themeConfig.wlink` 覆盖任意字段
+    - 更新了 `guide/links.md` 文档说明
+- `DetailLayout` 详情布局
+    - 新增全宽布局组件，PC 端左图右信息（4:6 比例）
+    - 移动端（<960px）自动切换为纵向堆叠
+    - 隐藏 sidebar 和 aside，不受 doc 布局影响
+- `Layout.vue`
+    - 新增 `layout: detail` 判断，自动切换至 DetailLayout
+
 ## 2026-07-26
 
 - 杂项
