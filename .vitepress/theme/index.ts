@@ -2,7 +2,8 @@ import DefaultTheme from 'vitepress/theme'
 import Layout from './Layout.vue'
 import './style/tailwind.css'
 import WLink from './components/WLink/index.vue' // 友链页
-import DetailLayout from './components/DetailLayout.vue' // 详情布局
+import DetailLayout from './components/DetailLayout.vue' // 详情布局（兼容旧用法）
+import DetailHeader from './components/DetailHeader.vue' // 详情头部（layout: detail 用法）
 export default {
     ...DefaultTheme,
     Layout,

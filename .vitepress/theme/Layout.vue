@@ -5,6 +5,7 @@ import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import Comment from './Comment.vue'
 import VPSwitchAppearance from './components/VPSwitchAppearance.vue'
+import DetailHeader from './components/DetailHeader.vue'
 
 const { frontmatter, theme } = useData()
 const route = useRoute()
@@ -51,6 +52,27 @@ const isRealHome = computed(() => {
 const isHomeSubPage = computed(() => {
   return frontmatter.value.layout === 'home' && frontmatter.value.hero === undefined
 })
+
+// 判断是否是详情布局
+const isDetailLayout = computed(() => {
+  return frontmatter.value.layout === 'detail'
+})
+
+// 详情布局：添加 has-detail 类到 .vp-doc
+if (typeof window !== 'undefined') {
+  watch(isDetailLayout, (val) => {
+    nextTick(() => {
+      const vpDoc = document.querySelector('.vp-doc')
+      if (vpDoc) {
+        if (val) {
+          vpDoc.classList.add('has-detail')
+        } else {
+          vpDoc.classList.remove('has-detail')
+        }
+      }
+    })
+  }, { immediate: true })
+}
 
 // 判断是否是文档页面
 const isDocPage = computed(() => {
@@ -167,6 +189,11 @@ watch(() => route.path, () => {
       </div>
     </template>
 
+    <!-- 详情布局（layout: detail）- 在文档内容前显示详情头部 -->
+    <template #doc-before v-if="isDetailLayout">
+      <DetailHeader />
+    </template>
+
     <!-- 文档页面评论（doc-after slot） -->
     <template #doc-after>
       <Comment v-if="isDocPage && isCommentEnabled" />
@@ -280,6 +307,19 @@ watch(() => route.path, () => {
 </style>
 
 <style>
+/* 详情布局：隐藏 sidebar 和 aside */
+.vp-doc.has-detail .VPSidebar {
+  display: none !important;
+}
+
+.vp-doc.has-detail .aside {
+  display: none !important;
+}
+
+.vp-doc.has-detail .content {
+  padding-left: 0 !important;
+}
+
 /* 让 Footer 显示在评论之后 */
 .VPFooter {
   order: 1;
