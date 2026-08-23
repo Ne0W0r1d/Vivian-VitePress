@@ -53,9 +53,9 @@ const isHomeSubPage = computed(() => {
   return frontmatter.value.layout === 'home' && frontmatter.value.hero === undefined
 })
 
-// 判断是否是详情布局
+// 判断是否是详情布局（有 image 和 fields 字段）
 const isDetailLayout = computed(() => {
-  return frontmatter.value.layout === 'detail'
+  return frontmatter.value.image && frontmatter.value.fields?.length > 0
 })
 
 // 详情布局：添加 has-detail 类到 .vp-doc
