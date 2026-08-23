@@ -1,5 +1,24 @@
 # 更新日志
 
+## 2026-08-23
+
+- `Comment` 评论系统
+    - 新增统一评论组件 `Comment.vue`，支持多评论系统切换
+    - 支持 Utterances（基于 GitHub Issues）评论系统
+    - 支持 Twikoo 评论系统（保持兼容）
+    - 配置方式：`themeConfig.comment.provider` 可选 `'none'` | `'twikoo'` | `'utterances'`
+- `Utterances` 组件
+    - 新增 Utterances 评论组件，自动根据页面路由注入评论
+    - 支持深浅色主题自动切换
+    - 页面导航时自动重新渲染评论
+- `Layout.vue`
+    - 集成 Comment 组件到文档页面（`doc-after` slot）
+    - 保持对 Home 子页面的评论支持（`layout-bottom` slot）
+    - 向后兼容旧版 `twikoo` 配置
+- 文档
+    - 新增 `guide/comment.md` 评论系统配置文档
+    - 包含 Twikoo 和 Utterances 的完整配置说明
+
 ## 2026-08-02
 
 - `WLink` 友链系统

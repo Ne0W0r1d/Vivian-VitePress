@@ -3,15 +3,25 @@ import { onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { computed } from 'vue'
 import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import Twikoo from './Twikoo.vue'
+import Comment from './Comment.vue'
 import VPSwitchAppearance from './components/VPSwitchAppearance.vue'
 
 const { frontmatter, theme } = useData()
 const route = useRoute()
 
-// Twikoo 配置
+// 评论配置（兼容旧的 twikoo 配置和新的 comment 配置）
+const commentConfig = computed(() => theme.value.comment || { provider: 'none' })
 const twikooConfig = computed(() => theme.value.twikoo || { enabled: false })
-const isTwikooEnabled = computed(() => twikooConfig.value.enabled !== false)
+
+// 判断是否启用评论（新配置或旧配置）
+const isCommentEnabled = computed(() => {
+  // 新配置: comment.provider
+  if (commentConfig.value.provider && commentConfig.value.provider !== 'none') {
+    return true
+  }
+  // 旧配置: twikoo.enabled
+  return twikooConfig.value.enabled !== false
+})
 
 // Logo 配置
 const logoConfig = computed(() => theme.value.vivianLogo || {})
@@ -40,6 +50,11 @@ const isRealHome = computed(() => {
 // 判断是否是 home 布局的子页面（有 layout: home 但没有 hero）
 const isHomeSubPage = computed(() => {
   return frontmatter.value.layout === 'home' && frontmatter.value.hero === undefined
+})
+
+// 判断是否是文档页面
+const isDocPage = computed(() => {
+  return !isRealHome.value && !isHomeSubPage.value && frontmatter.value.layout !== false
 })
 
 // 表格滚动容器
@@ -152,6 +167,11 @@ watch(() => route.path, () => {
       </div>
     </template>
 
+    <!-- 文档页面评论（doc-after slot） -->
+    <template #doc-after>
+      <Comment v-if="isDocPage && isCommentEnabled" />
+    </template>
+
     <!-- 404 页面 -->
     <template #not-found>
       <div class="not-found">
@@ -164,8 +184,8 @@ watch(() => route.path, () => {
 
     <!-- home 布局的子页面（非首页） -->
     <template #layout-bottom>
-      <div v-if="isHomeSubPage && isTwikooEnabled" class="twikoo-home-container">
-        <Twikoo :config="twikooConfig" />
+      <div v-if="isHomeSubPage && isCommentEnabled" class="comment-home-container">
+        <Comment />
       </div>
     </template>
   </DefaultTheme.Layout>
@@ -187,14 +207,14 @@ watch(() => route.path, () => {
   line-height: 1;
 }
 /* 评论区域样式 */
-.twikoo-home-container {
+.comment-home-container {
   max-width: 960px;
   margin: 0 auto;
   padding: 2rem 2.5rem;
 }
 
 /* Home 子页面分割线 */
-.twikoo-home-container::before {
+.comment-home-container::before {
   content: '';
   display: block;
   border-top: 1px solid rgba(70, 71, 87, 0.4);
@@ -202,7 +222,7 @@ watch(() => route.path, () => {
 }
 
 @media (max-width: 768px) {
-  .twikoo-home-container {
+  .comment-home-container {
     padding: 1rem 1.5rem;
   }
 }

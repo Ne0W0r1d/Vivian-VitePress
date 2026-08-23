@@ -56,15 +56,30 @@ export default defineConfig({
       message: 'Powered by VitePress x Vivian',
       copyright: 'Copyright © 2026 Ne0W0r1d'
     },
-    // Twikoo 评论系统配置
-    twikoo: {
-      enabled: false, // 是否启用评论系统
-      envId: 'https://your-twikoo-url.vercel.app', // Twikoo 环境 ID
-      // 可选配置
-      // region: 'ap-shanghai',
-      // path: 'window.location.pathname',
-      // lang: 'zh-CN',
+    // 评论系统配置（支持: none | twikoo | utterances）
+    comment: {
+      provider: 'utterances', // 评论系统提供商: 'none' | 'twikoo' | 'utterances'
+
+      // Twikoo 配置
+      twikoo: {
+        enabled: false, // 是否启用评论系统
+        envId: 'https://your-twikoo-url.vercel.app', // Twikoo 环境 ID
+        // 可选配置
+        // region: 'ap-shanghai',
+        // path: 'window.location.pathname',
+        // lang: 'zh-CN',
+      },
+
+      // Utterances 配置（基于 GitHub Issues）
+      utterances: {
+        repo: 'Ne0W0r1d/vivian-comments', // 仓库名，格式: owner/repo
+        issueTerm: 'pathname', // 用于匹配 issue 的字段: pathname | url | title | og:title
+        label: '', // 可选: issue 标签
+        theme: 'preferred-color-scheme', // 可选: github-light | github-dark | preferred-color-scheme 等
+        crossorigin: 'anonymous', // 可选: anonymous | use-credentials
+      },
     },
+
     nav: [
       { text: '主页', link: '/' },
       { text: '文档', link: '/guide/' },
@@ -83,7 +98,7 @@ export default defineConfig({
           { text: '介绍', link: '/guide/' },
           { text: '更新日志', link: '/update' },
           { text: '快速开始', link: '/guide/getting-started' },
-          { text: "Twikoo 集成", link: '/guide/twikoo'},
+          { text: "评论系统", link: '/guide/comment'},
           { text: "友链", link: '/guide/links'},
           { text: "代码高亮", link: '/guide/highlight'},
         ],

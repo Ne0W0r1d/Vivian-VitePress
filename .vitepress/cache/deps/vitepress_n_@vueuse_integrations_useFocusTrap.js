@@ -1,6 +1,6 @@
-import { U as computed, Yn as shallowRef, er as toValue, gn as watch } from "./vue.runtime.esm-bundler-Bqo3P_GY.js";
+import { U as computed, Yn as shallowRef, er as toValue, gn as watch } from "./vue.runtime.esm-bundler-Cm4xgTeR.js";
 import { notNullish, toArray, tryOnScopeDispose, unrefElement } from "./vitepress_n_@vueuse_core.js";
-//#region node_modules/.pnpm/tabbable@6.5.0/node_modules/tabbable/dist/index.esm.js
+//#region ../../node_modules/.pnpm/tabbable@6.5.0/node_modules/tabbable/dist/index.esm.js
 /*!
 * tabbable 6.5.0
 * @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
@@ -346,7 +346,7 @@ var isFocusable = function isFocusable(node, options) {
 	return isNodeMatchingSelectorFocusable(options, node);
 };
 //#endregion
-//#region node_modules/.pnpm/focus-trap@8.2.2/node_modules/focus-trap/dist/focus-trap.esm.js
+//#region ../../node_modules/.pnpm/focus-trap@8.2.2/node_modules/focus-trap/dist/focus-trap.esm.js
 /*!
 * focus-trap 8.2.2
 * @license MIT, https://github.com/focus-trap/focus-trap/blob/master/LICENSE
@@ -755,9 +755,10 @@ var createFocusTrap = function createFocusTrap(elements, userOptions) {
 		if (state.tabbableGroups.length > 0) {
 			var containerIndex = findContainerIndex(target, event);
 			var containerGroup = containerIndex >= 0 ? state.containerGroups[containerIndex] : void 0;
-			if (containerIndex < 0) if (isBackward) destinationNode = state.tabbableGroups[state.tabbableGroups.length - 1].lastTabbableNode;
-			else destinationNode = state.tabbableGroups[0].firstTabbableNode;
-			else if (isBackward) {
+			if (containerIndex < 0) {
+				if (isBackward) destinationNode = state.tabbableGroups[state.tabbableGroups.length - 1].lastTabbableNode;
+				else destinationNode = state.tabbableGroups[0].firstTabbableNode;
+			} else if (isBackward) {
 				var startOfGroupIndex = state.tabbableGroups.findIndex(function(_ref4) {
 					var firstTabbableNode = _ref4.firstTabbableNode;
 					return target === firstTabbableNode;
@@ -1144,16 +1145,13 @@ var createFocusTrap = function createFocusTrap(elements, userOptions) {
 					default:
 						if (el.inert || el.hasAttribute("inert")) state.alreadySilent.add(el);
 						el.setAttribute("inert", true);
-						break;
 				}
 				else if (state.alreadySilent.has(el));
 				else switch (config.isolateSubtrees) {
 					case "aria-hidden":
 						el.removeAttribute("aria-hidden");
 						break;
-					default:
-						el.removeAttribute("inert");
-						break;
+					default: el.removeAttribute("inert");
 				}
 			});
 		} }
@@ -1162,7 +1160,7 @@ var createFocusTrap = function createFocusTrap(elements, userOptions) {
 	return trap;
 };
 //#endregion
-//#region node_modules/.pnpm/@vueuse+integrations@14.3.0_focus-trap@8.2.2_vue@3.5.39/node_modules/@vueuse/integrations/dist/useFocusTrap.js
+//#region ../../node_modules/.pnpm/@vueuse+integrations@14.4.0_focus-trap@8.2.2_vue@3.5.41/node_modules/@vueuse/integrations/dist/useFocusTrap.js
 /**
 * Reactive focus-trap
 *

@@ -7,12 +7,12 @@
       </div>
       <div class="detail-info">
         <h1 class="detail-title" v-if="title">{{ title }}</h1>
-        <table class="detail-table" v-if="fields?.length">
-          <tr v-for="(field, i) in fields" :key="i">
-            <td class="detail-label">{{ field.label }}</td>
-            <td class="detail-value">{{ field.value }}</td>
-          </tr>
-        </table>
+        <div class="detail-table" v-if="fields?.length">
+          <div class="detail-row" v-for="(field, i) in fields" :key="i">
+            <span class="detail-label">{{ field.label }}</span>
+            <span class="detail-value">{{ field.value }}</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -108,34 +108,31 @@ const fields = computed(() => frontmatter.value.fields || [])
 
 /* 信息表格 */
 .detail-table {
-  width: 100% !important;
-  border-collapse: collapse !important;
-  table-layout: auto !important;
-  display: table !important;
+  width: 100%;
 }
 
-.detail-table tr {
+.detail-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  padding: 12px 0;
   border-bottom: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent);
+  align-items: baseline;
 }
 
-.detail-table tr:last-child {
+.detail-row:last-child {
   border-bottom: none;
 }
 
 .detail-label {
   font-weight: 600;
   color: var(--vp-c-text-2);
-  padding: 12px 16px 12px 0;
   white-space: nowrap;
-  vertical-align: top;
-  background: transparent !important;
 }
 
 .detail-value {
   color: var(--vp-c-text-1);
-  padding: 12px 0;
   word-break: break-word;
-  background: transparent !important;
 }
 
 /* Markdown 内容区域 */
@@ -145,11 +142,11 @@ const fields = computed(() => frontmatter.value.fields || [])
 
 /* 深色模式 */
 .dark .detail-image {
-  background-color: color-mix(in srgb, var(--vp-c-bg) 50%, transparent);
+  background-color: color-mix(in srgb, var(--vp-c-bg) 55%, transparent);
 }
 
 .dark .detail-info {
-  background-color: color-mix(in srgb, var(--vp-c-bg) 50%, transparent);
+  background-color: color-mix(in srgb, var(--vp-c-bg) 55%, transparent);
 }
 
 /* ========== 移动端：纵向堆叠 ========== */

@@ -1,4 +1,4 @@
-//#region node_modules/.pnpm/minisearch@7.2.0/node_modules/minisearch/dist/es/index.js
+//#region ../../node_modules/.pnpm/minisearch@7.2.0/node_modules/minisearch/dist/es/index.js
 /** @ignore */
 var ENTRIES = "ENTRIES";
 /** @ignore */
@@ -1579,9 +1579,10 @@ var MiniSearch = class MiniSearch {
 		const indexData = this._index.fetch(term, createMap);
 		const fieldIndex = indexData.get(fieldId);
 		if (fieldIndex == null || fieldIndex.get(documentId) == null) this.warnDocumentChanged(documentId, fieldId, term);
-		else if (fieldIndex.get(documentId) <= 1) if (fieldIndex.size <= 1) indexData.delete(fieldId);
-		else fieldIndex.delete(documentId);
-		else fieldIndex.set(documentId, fieldIndex.get(documentId) - 1);
+		else if (fieldIndex.get(documentId) <= 1) {
+			if (fieldIndex.size <= 1) indexData.delete(fieldId);
+			else fieldIndex.delete(documentId);
+		} else fieldIndex.set(documentId, fieldIndex.get(documentId) - 1);
 		if (this._index.get(term).size === 0) this._index.delete(term);
 	}
 	/**
