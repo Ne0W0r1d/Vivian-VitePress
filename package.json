@@ -8,8 +8,7 @@
     "preview": "vitepress preview"
   },
   "dependencies": {
-    "twikoo": "^1.7.15",
-    "vitepress-plugin-utterances": "^0.0.1"
+    "twikoo": "^1.7.15"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.1",
