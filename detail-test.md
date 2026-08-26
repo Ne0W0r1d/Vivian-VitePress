@@ -22,8 +22,6 @@ fields:
     value: 正常运行
 ---
 
-<detail-layout />
-
 ## 备注信息
 
 这是一个 **Detail 布局** 的测试页面。
