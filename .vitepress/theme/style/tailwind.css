@@ -634,6 +634,65 @@
     }
 }
 
+/* ========== 搜索弹窗关闭动画 ========== */
+/* .closing 由 config.mts 中的 patchSearchExitAnimation 插件注入的
+   requestClose() 添加，动画播完（250ms）后组件才真正卸载 */
+.VPLocalSearchBox.closing .backdrop {
+    animation: searchBackdropOut 0.25s ease-in forwards;
+}
+
+.VPLocalSearchBox.closing .shell {
+    animation: searchShellOut 0.25s cubic-bezier(0.4, 0, 1, 1) forwards;
+    transform-origin: top center;
+}
+
+@keyframes searchBackdropOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes searchShellOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-16px) scale(0.94);
+    }
+}
+
+/* 移动端：向下滑出（与进入方向相反） */
+@media (max-width: 767px) {
+    .VPLocalSearchBox.closing .shell {
+        animation: searchShellOutMobile 0.25s cubic-bezier(0.4, 0, 1, 1) forwards;
+        transform-origin: bottom center;
+    }
+
+    @keyframes searchShellOutMobile {
+        from {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(24px) scale(0.92);
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .VPLocalSearchBox.closing .backdrop,
+    .VPLocalSearchBox.closing .shell {
+        animation-duration: 0.01s !important;
+    }
+}
+
+
 .VPLocalSearchBox .search-bar {
     background-color: transparent !important;
     border: 1px solid color-mix(in srgb, var(--vp-c-border) 40%, transparent) !important;

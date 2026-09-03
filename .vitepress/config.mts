@@ -1,5 +1,91 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, type Plugin } from 'vitepress'
 import tailwindcss from '@tailwindcss/vite'
+
+/**
+ * 客户端行为补丁（不改动 node_modules，随仓库走，升级 VitePress 后依然生效）：
+ *
+ * 1. VPLocalSearchBox：注入"延迟卸载"逻辑，让关闭动画有时间播放。
+ *    原实现：VPNavBarSearch 中 <VPLocalSearchBox v-if @close="showSearch = false">
+ *    在收到 close 事件的同一帧卸载组件，CSS 退出动画来不及播放。这里把所有
+ *    emit('close') / $emit('close') 替换为 requestClose()：先加 .closing 类
+ *    播退出动画，动画结束后再真正 emit 触发卸载。
+ *
+ * 2. app/router.js：锚点跳转平滑滚动。
+ *    原实现：scrollTo() 调用 target.scrollIntoView({ block: 'start' })，
+ *    behavior 缺省为 auto（瞬时）。这里注入 behavior: 'smooth'（尊重
+ *    prefers-reduced-motion）。popstate 恢复滚动位置走的是 window.scrollTo(0, n)，
+ *    不受影响，浏览器前进/后退仍然是瞬时定位。
+ */
+function vivianClientPatches(): Plugin {
+  return {
+    name: 'vivian:client-patches',
+    enforce: 'pre',
+    transform(code, id) {
+      // —— 补丁 1：搜索弹窗延迟卸载 ——
+      if (id.includes('VPLocalSearchBox.vue')) {
+        const emitsDecl =
+          /const emit = defineEmits<\{\s*\(e: 'close'\): void\s*\}>\(\)/
+        if (!emitsDecl.test(code)) return null
+
+        // 注意顺序：必须先替换 "$emit('close')" 再替换 "emit('close')"。
+        // 反过来的话，"$emit('close')" 会先被命中其中的 "emit('close')" 子串，
+        // 变成 "$requestClose()"——模板里引用了不存在的实例方法，运行时抛
+        // "TypeError: e.$requestClose is not a function"，导致点击 backdrop /
+        // 返回按钮 / 搜索结果全都无法关闭弹窗（移动端全屏时表现为"关不掉"）。
+        // 模板里写成 "$requestClose()" 的另一个问题是 <script setup> 不会把
+        // setup 顶层绑定暴露到实例上，所以即使拼对了 "$requestClose" 也不存在。
+        // 替换成裸标识符 "requestClose" 后，编译器检测到模板引用了它，
+        // 会自动把它收进渲染函数作用域，才是真正生效的调用方式。
+        let out = code
+          .replaceAll("$emit('close')", 'requestClose()')
+          .replaceAll("emit('close')", 'requestClose()')
+
+        const matched = out.match(emitsDecl)
+        if (!matched) return null
+        out = out.replace(
+          matched[0],
+          `${matched[0]}
+
+/* vivian: 关闭动画 —— 延迟卸载，让退出动画有时间播放 */
+const isClosing = ref(false)
+function requestClose() {
+  if (isClosing.value) return
+  isClosing.value = true
+  el.value?.classList.add('closing')
+  window.setTimeout(() => emit('close'), 250)
+}`
+        )
+        return { code: out, map: null }
+      }
+
+      // —— 补丁 2：锚点跳转平滑滚动 ——
+      if (id.includes('app/router.js')) {
+        const instant = "target.scrollIntoView({ block: 'start' });"
+        if (!code.includes(instant)) return null
+        const smooth =
+          "target.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });"
+        return { code: code.replace(instant, smooth), map: null }
+      }
+
+      // —— 补丁 3：移动端下拉菜单 "Return to top" 平滑滚动 ——
+      // 原实现：<a class="top-link" href="#" @click="scrollToTop">，scrollToTop 里
+      // 明明写了 window.scrollTo({ behavior: 'smooth' })，实际却是瞬时跳顶。
+      // 原因：href="#" 被 router 的 window capture 点击监听（补丁 2 同款先手问题）
+      // 当作"当前页"的同页导航拦截 → e.preventDefault() + router.go(当前URL)
+      // → scrollTo('') 走 !hash 分支 → window.scrollTo(0, 0) 瞬时回顶，
+      // 等组件自己的 scrollToTop 执行时页面已经在顶部，smooth 无事可做。
+      // 修复：去掉 href="#"。router 明确跳过无 href 的链接（linkHref == null 直接
+      // return），scrollToTop 的平滑滚动得以生效，router 也不会再多推一条历史记录。
+      if (id.includes('VPLocalNavOutlineDropdown.vue')) {
+        const anchor = '<a class="top-link" href="#" @click="scrollToTop">'
+        if (!code.includes(anchor)) return null
+        return { code: code.replace(anchor, anchor.replace(' href="#"', '')), map: null }
+      }
+
+      return null
+    }
+  }
+}
 
 export default defineConfig({
   appearance: true,
@@ -101,6 +187,7 @@ export default defineConfig({
           { text: "评论系统", link: '/guide/comment'},
           { text: "友链", link: '/guide/links'},
           { text: "代码高亮", link: '/guide/highlight'},
+          { text: "Detail 详情组件", link: '/guide/detail'},
         ],
       },
       {
@@ -121,6 +208,6 @@ export default defineConfig({
     lineNumbers: true
   },
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss(), vivianClientPatches()]
   }
 })

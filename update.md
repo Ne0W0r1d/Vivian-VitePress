@@ -1,5 +1,26 @@
 # 更新日志
 
+## 2026-09-03 1.1.0-rc2
+
+- `detail` 详情组件（原 `DetailLayout` / `DetailHeader`）
+    - 重构为全局注册的 `<detail />` 组件，不再依赖 Layout 层检测 `image` + `fields` 自动注入，可在任意页面通过自闭合标签 `<detail />` 显式使用
+    - 数据来源支持组件 props 优先、回退 frontmatter，兼容旧写法
+    - 新增 `cover`（顶部通栏封面）、`subtitle`（副标题）、`tag`（标题徽章）属性
+    - `fields` 的 `label` / `value` 支持行内 Markdown，可书写超链接、加粗、行内代码（外链自动 `target="_blank"`）
+    - 移除旧的 `DetailHeader.vue` 注入逻辑，侧边栏 / 大纲隐藏统一交由 frontmatter 的 `sidebar: false` / `aside: false` 控制
+- 文档
+    - 新增 `guide/detail.md` 说明 `detail` 组件的用法与属性
+    - 修复了详情页 NavBar 元素布局异常的问题
+- `LocalSearch` 搜索
+    - 新增搜索弹窗关闭退出动画：遮罩点击、返回按钮、Enter 选中、Escape 四个关闭入口统一走延迟卸载，播放 250ms 动画后再卸载节点
+    - 退出动画区分端型：PC 端向上收缩淡出（与入场方向相反），移动端向下滑出
+    - 修复了移动端全屏覆盖时搜索弹窗无法关闭、返回按键失效的问题
+- `ASide` 章节指示
+    - 点击大纲章节锚点改为平滑滚动，不再瞬时跳转；PC 端大纲与移动端下拉菜单均生效
+    - 修复了移动端下拉菜单 "Return to top" 瞬时跳顶而非平滑滚动的问题
+- 杂项
+    - 上述动效均支持 `prefers-reduced-motion: reduce` 降级为瞬时行为
+
 ## 2026-08-23
 
 - `Comment` 评论系统

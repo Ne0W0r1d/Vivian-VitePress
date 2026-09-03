@@ -1,6 +1,6 @@
 {
   "name": "vivian",
-  "version": "1.0.0",
+  "version": "1.0.1-rc1",
   "description": "A VitePress Theme",
   "scripts": {
     "dev": "vitepress dev",
