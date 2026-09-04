@@ -20,8 +20,12 @@ export interface WLinkSiteInfoLabel {
 
 export interface WLinkConfig {
   title: string
-  toggleShow: string
-  toggleHide: string
+  // Tag 筛选栏「全部」按钮文案
+  allTag: string
+  // 未填写 tag 的友链归入的分组名
+  defaultTag: string
+  // 筛选后分类为空时的提示文案
+  emptyText: string
   leaveTitle: string
   leaveDesc: string
   joinText: string
@@ -37,8 +41,9 @@ export interface WLinkConfig {
 
 export const defaultConfig: WLinkConfig = {
   title: '友链',
-  toggleShow: '查看',
-  toggleHide: '收起',
+  allTag: '全部',
+  defaultTag: '未分类',
+  emptyText: '该分类下暂无友链',
   leaveTitle: '留链',
   leaveDesc: '欢迎留下你的足迹',
   joinText: '非常高兴能和很多朋友交流，如果你也想加入',

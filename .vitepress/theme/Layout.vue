@@ -293,6 +293,17 @@ html:has(.detail-layout) .VPDoc .content {
   padding-left: 0 !important;
 }
 
+/* detail 作为整页布局（layout: detail）时：VPContent.has-sidebar 的内边距
+   左右不对称（左多出 272px 侧边栏宽度），只清左边会导致内容整体偏左，
+   必须两侧同时归零；水平居中由 .detail-as-layout 自身的
+   max-width + margin-inline:auto 负责。
+   注意用 .detail-as-layout 而非 .detail-layout 命中：
+   行内 <detail /> 所在的普通文档页需要保留 VPContent 原生内边距 */
+html:has(.detail-as-layout) .VPContent {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 /* 让 Footer 显示在评论之后 */
 .VPFooter {
   order: 1;

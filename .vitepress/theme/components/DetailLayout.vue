@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-layout">
+  <div class="detail-layout" :class="{ 'detail-as-layout': isPageLayout }">
     <!-- 可选通栏封面图 -->
     <div class="detail-cover" v-if="cover">
       <img :src="cover" :alt="title || ''" />
@@ -22,13 +22,29 @@
         </div>
       </div>
     </div>
+
+    <!-- 整页布局模式（layout: detail）：渲染 Markdown 正文 -->
+    <div v-if="isPageLayout" class="detail-body vp-doc">
+      <Content />
+    </div>
+
+    <!-- 整页布局模式：评论区。自定义 layout 分支不经过 VPDoc，
+         Layout.vue 的 doc-after 插槽没有出口，需要在这里自行挂载 -->
+    <Comment v-if="isPageLayout" class="detail-comment" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, inject, provide } from 'vue'
 import { useData } from 'vitepress'
 import { mdRender } from '../markdown'
+import Comment from '../Comment.vue'
+
+// 防递归标记：layout: detail 模式下本组件会渲染 <Content />，
+// 若正文里又写了 <detail />，内层实例通过 inject 感知，保持 hero 模式不再渲染正文。
+const LAYOUT_BODY_KEY = 'vivian:detail-as-layout'
+const insideLayoutBody = inject<boolean>(LAYOUT_BODY_KEY, false)
+provide(LAYOUT_BODY_KEY, true)
 
 const { frontmatter } = useData()
 
@@ -59,6 +75,11 @@ const subtitle = computed(() => props.subtitle || frontmatter.value.subtitle)
 const tag = computed(() => props.tag || frontmatter.value.tag)
 const fields = computed(() => props.fields || frontmatter.value.fields || [])
 
+// 页面布局模式：frontmatter 声明 layout: detail 时，VitePress 会把本组件
+// 当作整页布局渲染（VPContent 的 <component :is="frontmatter.layout" /> 分支），
+// 此时组件负责 hero + Markdown 正文 + 评论区；行内用法（<detail />）只渲染 hero。
+const isPageLayout = computed(() => frontmatter.value.layout === 'detail' && !insideLayoutBody)
+
 // 将字段文本按 Markdown 渲染（支持超链接、加粗、行内代码）
 function inlineMd(src?: string): string {
   return mdRender(src)
@@ -70,6 +91,16 @@ function inlineMd(src?: string): string {
   width: 100%;
   max-width: 100%;
   padding: calc(var(--vp-nav-height) + 24px) 32px 48px;
+}
+
+/* 整页布局模式：限宽居中（行内模式由 VPDoc 负责限宽） */
+.detail-as-layout {
+  max-width: var(--vp-layout-max-width);
+  margin-inline: auto;
+}
+
+.detail-body {
+  margin-bottom: 24px;
 }
 
 /* 通栏封面 */
@@ -99,6 +130,10 @@ function inlineMd(src?: string): string {
   gap: 32px;
   align-items: start;
   margin-bottom: 40px;
+}
+
+.detail-as-layout .detail-hero {
+  margin-bottom: 32px;
 }
 
 /* 预览图 */

@@ -1,5 +1,33 @@
 # 更新日志
 
+## 2026-09-04 1.2.0
+
+- 修复与排版（友链 / Detail 布局）
+    - **友链页评论区修复**：自定义布局分支不经过 VPDoc，此前留链容器内裸挂的 `<Twikoo />` 从未初始化（缺 config prop 且项目评论系统为 utterances）——现改为在留链容器之后显式挂载 `Comment` 组件，跟随 `themeConfig.comment` 配置；页面顺序为：标题 → Tag 筛选 → 友链卡片 → 留链容器 → 评论区
+    - **Twikoo 挂载点防冲突**：挂载容器 `id` 改为每实例唯一，同页多个评论实例不再互相覆盖
+    - **Detail 整页布局水平居中**：`VPContent.has-sidebar` 在 ≥1440px 时左右内边距不对称（左侧多出 272px 侧边栏宽度），导致 `layout: detail` 页面整体偏左；现两侧内边距同时归零，居中交给 `.detail-as-layout` 自身的 `max-width + margin-inline: auto`
+    - **友链页标题 H1 化**：标题排版对齐 `.vp-doc h1` 官方规范（28px → ≥768px 32px、weight 600、letter-spacing -0.02em），与文档页 H1 观感一致
+    - **移动端 NavBar 遮挡修复**：主题在所有断点将 `.VPNav` 强制为悬浮玻璃条（`position: fixed`），但官方顶部补偿仅在 ≥960px 生效，自定义布局页移动端标题被压在导航栏下——友链页 `#main` 在 <960px 补 `padding-top: calc(var(--vp-nav-height) + 16px)`（Detail 布局自带补偿，无需处理）
+
+- `Detail` 布局
+    - `detail` 现在可作为**页面布局**使用：frontmatter 声明 `layout: detail` 即可整页启用，无需再写 `<detail />` 标签
+    - 整页模式下正文由 VitePress 原生 `<Content />` 渲染，Markdown 功能（标题/代码块/表格/自定义容器）完全正常
+    - 整页模式自动在正文下方挂载评论区（该布局分支不经过 VPDoc，需自行挂载 Comment 组件）
+    - 组件内置防递归保护：正文里再写 `<detail />` 时，内层只渲染 hero 信息区，不会重复渲染正文
+    - `layout: detail` 分支自动隐藏侧边栏与大纲（`:has()` 兜底规则扩展至 `.VPContent` 左内边距修正）
+- `WLink` 友链系统重构
+    - 卡片重设计：**头像在上，昵称与签名在下**，居中竖排液态玻璃卡片，悬停上浮 + 主题色光环 + 昵称渐变填充
+    - **保留首字头像机制**：头像加载失败时自动回退为站点名称首字
+    - 新增 **Tag 分类筛选**：frontmatter 每条友链增加可选 `tag` 字段，页面顶部展示「全部 + 各 Tag」药丸按钮并带计数，点击切换分类
+    - 切换分类带 **FLIP 换位 + 缩放淡入淡出动画**（TransitionGroup），遵循 `prefers-reduced-motion` 降级
+    - 数据结构简化：原 `links`（分组）+ `outLinks`（折叠分组）合并为单一平铺 `links`，移除 `outLinks` / `noAvatar` / `toggleShow` / `toggleHide`
+    - 新增配置项 `allTag`（「全部」按钮文案）、`defaultTag`（未标注友链的分组名）、`emptyText`（空分类提示），均可经 `themeConfig.wlink` 覆盖
+    - **留链容器保留**，位置固定在友链列表与评论区之间
+- 文档
+    - `guide/links.md` 重写为新结构说明，新增「从旧版本迁移」章节
+    - `guide/detail.md` 新增「作为页面布局使用（layout: detail）」章节
+    - `links.md` 演示数据更新为 Tag 分类结构（站长 / 鸣谢 / 工具）
+
 ## 2026-09-03 1.1.0-rc2
 
 - `detail` 详情组件（原 `DetailLayout` / `DetailHeader`）

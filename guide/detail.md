@@ -126,6 +126,32 @@ props 形式的 `fields` 是数组字面量，在 Markdown 内联容易触发编
 **建议 `fields` 一律写在 frontmatter 里**，其余字段可用 props 或 frontmatter 均可。
 :::
 
+## 作为页面布局使用（layout: detail）
+
+除了在正文中写 `<detail />`，也可以直接在 frontmatter 声明 `layout: detail`，让整页使用 Detail 布局：
+
+```markdown
+---
+layout: detail
+title: "星穹铁道角色介绍"
+image: /imgs/character.webp
+fields:
+  - label: 稀有度
+    value: ★★★★★
+---
+
+## 角色背景
+
+这里是正常的 Markdown 正文……
+```
+
+两种方式渲染效果一致：hero 信息区 + 下方正文，数据同样来自 frontmatter。区别在于：
+
+- `layout: detail` 模式下**不需要**（也不应该）再写 `<detail />` 标签，页面本身就是 Detail 布局
+- **Markdown 功能完全正常**：正文经 VitePress 原生 `<Content />` 渲染，标题、代码块、表格、自定义容器全部可用
+- 评论区会自动挂载在正文下方（该模式不经过 VPDoc，主题会自行挂载 Comment 组件）
+- 组件内部做了防递归处理：若正文里再写 `<detail />`，内层只渲染 hero 信息区，不会重复渲染正文
+
 ## 隐藏侧边栏与大纲
 
 详情页通常不需要侧边栏和大纲。在 frontmatter 加两行即可：
