@@ -1,0 +1,142 @@
+---
+title: Detail 详情组件
+description: 使用 <detail /> 组件快速搭建图文详情页
+---
+
+# Detail 详情组件
+
+Vivian 主题内置了一个 `detail` 组件，用于快速搭建「左图右信息 + 下方正文」的详情页（如游戏介绍、软件说明、人物卡片等）。
+
+它已作为全局组件注册，无需 import，直接在 Markdown 里使用自闭合标签 `<detail />` 即可，数据通过 frontmatter（或 props）传入。
+
+:::tip
+`detail` 必须是**自闭合标签** `<detail />`，不能写成 `<detail>...</detail>` 包裹正文——VitePress 不支持用自定义组件标签包裹 Markdown 内容。
+正文照常写在 `<detail />` 下方即可。
+:::
+
+## 基础用法
+
+在文档顶部 frontmatter 写 `image` 与 `fields`，正文里放一个 `<detail />`：
+
+```markdown
+---
+title: "星穹铁道角色介绍"
+image: /imgs/character.webp
+sidebar: false
+aside: false
+fields:
+  - label: 稀有度
+    value: ★★★★★
+  - label: 属性
+    value: 量子
+  - label: 上线版本
+    value: 1.0
+---
+
+<detail />
+
+## 角色背景
+
+这里是正常的 Markdown 正文……
+```
+
+渲染效果：左侧预览图 + 右侧信息表，下方是正文。
+
+## 可用属性
+
+组件同时支持 **frontmatter 字段** 和 **组件 props**（props 优先级更高）。
+
+| 属性 | 说明 | 对应 frontmatter |
+|------|------|------------------|
+| `image` | 左侧预览图地址 | `image` |
+| `cover` | 顶部通栏封面大图（可选） | `cover` |
+| `title` | 标题 | `title` |
+| `subtitle` | 副标题，显示在标题下方 | `subtitle` |
+| `tag` | 标题上方的彩色徽章 | `tag` |
+| `fields` | 信息表，数组 `[{ label, value }]` | `fields` |
+
+:::tip 字段支持 Markdown
+`fields` 的 `label` 与 `value` 会按**行内 Markdown** 渲染，可书写超链接、加粗、行内代码：
+
+```yaml
+fields:
+  - label: 官网
+    value: "[Can We Tux](https://tux.red)"
+  - label: 备注
+    value: "**重要**：详见 [文档](/guide/detail)"
+  - label: 命令
+    value: "`pnpm dev`"
+```
+
+支持的语法：`[文字](链接)`、`**加粗**`、`` `代码` ``。链接输出与正文一致（外部链接自动 `target="_blank"`）。
+:::
+
+:::warning YAML 特殊字符必须加引号
+当 `value` 含有 `:`、`[`、`]`、`#`、`*` 等字符（例如链接里的 `https://`）时，**必须用引号包裹**，否则 YAML 解析会报错：
+
+```yaml
+# ✅ 正确
+value: "[Nous Research](https://nousresearch.com)"
+
+# ❌ 错误（YAML 会把 https: 当成键值对而报错）
+value: [Nous Research](https://nousresearch.com)
+```
+:::
+
+### 示例：带封面与副标题
+
+```markdown
+---
+title: "薇薇安"
+subtitle: "反舌鸟阵营 · 隶属「无关人士」"
+tag: "限定"
+cover: /imgs/vivian-cover.webp
+image: /imgs/vivian.webp
+sidebar: false
+aside: false
+fields:
+  - label: 阵营
+    value: 反舌鸟
+  - label: 稀有度
+    value: ★★★★★
+---
+
+<detail />
+
+## 简介
+
+薇薇安是《绝区零》中的角色……
+```
+
+也可以用 props 显式传参（推荐用于需要复用的场景）：
+
+```markdown
+<detail
+  image="/imgs/vivian.webp"
+  title="薇薇安"
+  subtitle="反舌鸟阵营"
+  tag="限定"
+/>
+
+正文内容……
+```
+
+:::warning
+props 形式的 `fields` 是数组字面量，在 Markdown 内联容易触发编译问题；
+**建议 `fields` 一律写在 frontmatter 里**，其余字段可用 props 或 frontmatter 均可。
+:::
+
+## 隐藏侧边栏与大纲
+
+详情页通常不需要侧边栏和大纲。在 frontmatter 加两行即可：
+
+```yaml
+sidebar: false
+aside: false
+```
+
+主题也会在检测到页面包含 `detail` 组件时自动隐藏侧边栏与大纲（兜底规则），但显式声明更稳妥。
+
+## 演示页
+
+本主题自带一个演示页：[Vivian 主题详情测试](/detail-test)，可直接参考其源码 `detail-test.md`。
