@@ -34,9 +34,28 @@
   </div>
 </template>
 
+<script lang="ts">
+/**
+ * 构建期收集项目内全部图片源文件（排除 public / node_modules / .vitepress），
+ * 编译为最终产物 URL，形成「源文件路径 → 产物 URL」映射。
+ *
+ * 放在模块作用域：整站只构建一次映射，不随组件实例重建；SSR/水合两侧一致。
+ * 注意：import.meta.glob 的参数必须是静态字面量，不能拼接变量。
+ */
+const sourceImages = import.meta.glob(
+  [
+    '/**/*.{png,jpg,jpeg,gif,webp,svg,avif,bmp,ico}',
+    '!/public/**',
+    '!/**/node_modules/**',
+    '!/.vitepress/**'
+  ],
+  { eager: true, query: '?url', import: 'default' }
+) as Record<string, string>
+</script>
+
 <script setup lang="ts">
 import { computed, inject, provide } from 'vue'
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 import { mdRender } from '../markdown'
 import Comment from '../Comment.vue'
 
@@ -46,7 +65,7 @@ const LAYOUT_BODY_KEY = 'vivian:detail-as-layout'
 const insideLayoutBody = inject<boolean>(LAYOUT_BODY_KEY, false)
 provide(LAYOUT_BODY_KEY, true)
 
-const { frontmatter } = useData()
+const { frontmatter, page } = useData()
 
 const props = withDefaults(
   defineProps<{
@@ -67,13 +86,75 @@ const props = withDefaults(
   }
 )
 
-// 优先使用组件 props，回退到 frontmatter（兼容旧用法）
-const image = computed(() => props.image || frontmatter.value.image)
-const cover = computed(() => props.cover || frontmatter.value.cover)
+// 优先使用组件 props，回退到 frontmatter（兼容旧用法）。
+// image/cover 保存原始值（raw），解析后再交给 <img :src>
+const rawImage = computed(() => props.image || frontmatter.value.image)
+const rawCover = computed(() => props.cover || frontmatter.value.cover)
+const image = computed(() => resolveAsset(rawImage.value))
+const cover = computed(() => resolveAsset(rawCover.value))
 const title = computed(() => props.title || frontmatter.value.title)
 const subtitle = computed(() => props.subtitle || frontmatter.value.subtitle)
 const tag = computed(() => props.tag || frontmatter.value.tag)
 const fields = computed(() => props.fields || frontmatter.value.fields || [])
+
+/**
+ * 解析 Detail 布局的图片地址，支持三种写法：
+ *
+ * 1. 相对路径（./img.webp、../assets/img.webp、img.webp）
+ *    以「当前页面所在目录」为基准解析，再查 sourceImages 映射换成产物 URL。
+ *    这与 Markdown 正文里相对图片的 VitePress 语义一致。
+ *    查不到映射时回退为解析后的相对 URL（开发模式未被 glob 收录时兜底）。
+ *
+ * 2. 站点绝对路径（/imgs/vivian.webp）
+ *    指向 public 目录，经 withBase 处理，兼容 base 非根部署。
+ *    若恰好在 sourceImages 里（如主题包内图片），优先用产物 URL。
+ *
+ * 3. 完整 URL（https://... 等）
+ *    含协议或 // 开头，原样返回。
+ */
+function resolveAsset(src?: string): string {
+  if (!src) return ''
+
+  // 先 trim：容忍 YAML 引号内的前导/尾随空格（如 image: " /imgs/x.webp"）
+  const clean = src.trim()
+
+  // 完整 URL / 协议相对地址：原样返回
+  if (/^(https?:)?\/\//i.test(clean) || /^(data|blob|mailto):/i.test(clean)) {
+    return clean
+  }
+
+  // 站点绝对路径：优先查映射（写绝对路径但实际指向 srcDir 内源文件时也能命中），
+  // 未命中视为 public 资源，补 base 前缀
+  if (clean.startsWith('/')) {
+    return sourceImages[clean] || withBase(clean)
+  }
+
+  // 相对路径：以当前页面所在目录为基准（与 Markdown 相对图片语义一致）。
+  // page.relativePath 是当前页面相对 srcDir 的源文件路径（如 guide/detail.md），
+  // 取其目录部分拼接相对路径后再查映射。SSR 与客户端该值一致，水合稳定。
+  // cleanPath 会把多斜杠压成一个，再手动拼接，避免 split 产生空段。
+  const dir = cleanPath(`/${page.value.relativePath}`)
+    .split('/')
+    .slice(0, -1)
+    .join('/')
+  const joined = cleanPath(`${dir}/${clean}`)
+  return sourceImages[joined] || withBase(joined)
+}
+
+/** 规范化路径：压缩连续斜杠、解析 ./ 与 ../ 段，始终以 / 开头 */
+function cleanPath(p: string): string {
+  const normalized = `/${p}`.replace(/\/{2,}/g, '/')
+  const out: string[] = []
+  for (const seg of normalized.split('/')) {
+    if (seg === '' || seg === '.') continue
+    if (seg === '..') {
+      out.pop()
+    } else {
+      out.push(seg)
+    }
+  }
+  return `/${out.join('/')}`
+}
 
 // 页面布局模式：frontmatter 声明 layout: detail 时，VitePress 会把本组件
 // 当作整页布局渲染（VPContent 的 <component :is="frontmatter.layout" /> 分支），

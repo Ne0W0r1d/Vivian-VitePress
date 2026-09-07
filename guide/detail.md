@@ -48,8 +48,8 @@ fields:
 
 | 属性 | 说明 | 对应 frontmatter |
 |------|------|------------------|
-| `image` | 左侧预览图地址 | `image` |
-| `cover` | 顶部通栏封面大图（可选） | `cover` |
+| `image` | 左侧预览图地址（支持相对路径 / 绝对路径 / 外链） | `image` |
+| `cover` | 顶部通栏封面大图（可选，路径写法同 `image`） | `cover` |
 | `title` | 标题 | `title` |
 | `subtitle` | 副标题，显示在标题下方 | `subtitle` |
 | `tag` | 标题上方的彩色徽章 | `tag` |
@@ -124,6 +124,30 @@ fields:
 :::warning
 props 形式的 `fields` 是数组字面量，在 Markdown 内联容易触发编译问题；
 **建议 `fields` 一律写在 frontmatter 里**，其余字段可用 props 或 frontmatter 均可。
+:::
+
+## 图片路径写法
+
+`image` 与 `cover` 支持三种路径写法，解析行为与 Markdown 正文里的图片引用保持一致：
+
+| 写法 | 示例 | 行为 |
+|------|------|------|
+| 相对路径 | `./cover.webp`、`../assets/img.png` | 以**当前页面所在目录**为基准解析，构建时作为站点资源打包（带 hash 指纹，自动参与构建优化） |
+| 站点绝对路径 | `/imgs/character.webp` | 指向 `public` 目录，输出时自动补全 [`base`](https://vitepress.dev/zh/reference/site-config#base) 前缀 |
+| 完整 URL | `https://example.com/img.webp` | 原样引用，不做处理 |
+
+```yaml
+---
+# 相对路径：图片放在页面同目录（或其子目录）下
+image: ./img/character.webp
+
+# 绝对路径：图片放在 public/imgs/ 下
+image: /imgs/character.webp
+---
+```
+
+:::tip 推荐
+相对路径的图片会经 Vite 构建管线处理（hash 指纹、压缩优化），且随页面目录组织，**推荐优先使用**；`/` 绝对路径适合跨页面复用的公共图片。
 :::
 
 ## 作为页面布局使用（layout: detail）
