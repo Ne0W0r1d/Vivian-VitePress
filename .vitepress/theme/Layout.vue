@@ -62,8 +62,6 @@ function wrapTables() {
     const tables = document.querySelectorAll('.vp-doc table')
     tables.forEach(table => {
       if (table.parentElement?.classList.contains('table-scroll-wrapper')) return
-      // 跳过 detail 布局内的表格
-      if (table.closest('.detail-layout')) return
       const wrapper = document.createElement('div')
       wrapper.className = 'table-scroll-wrapper'
       table.parentNode?.insertBefore(wrapper, table)
